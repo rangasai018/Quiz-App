@@ -2,13 +2,16 @@ import { useState } from 'react'
 import ProgressBar from './ProgressBar'
 import Question from './Question'
 import Result from './Result'
+import Review from './Review'
 
-function Quiz({ questions }) {
+function Quiz({ subject, onBack }) {
+  const { questions, name: subjectName } = subject
   const [currentIndex, setCurrentIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
-  const [isFinished, setIsFinished] = useState(false)
+  const [answers, setAnswers] = useState([])
+  const [view, setView] = useState('quiz')
 
   const currentQuestion = questions[currentIndex]
   const isLastQuestion = currentIndex === questions.length - 1
@@ -18,6 +21,7 @@ function Quiz({ questions }) {
 
     setSelectedAnswer(index)
     setShowFeedback(true)
+    setAnswers((prev) => [...prev, index])
 
     if (index === currentQuestion.correctAnswer) {
       setScore((prev) => prev + 1)
@@ -26,7 +30,7 @@ function Quiz({ questions }) {
 
   const handleNext = () => {
     if (isLastQuestion) {
-      setIsFinished(true)
+      setView('result')
     } else {
       setCurrentIndex((prev) => prev + 1)
       setSelectedAnswer(null)
@@ -39,21 +43,44 @@ function Quiz({ questions }) {
     setScore(0)
     setSelectedAnswer(null)
     setShowFeedback(false)
-    setIsFinished(false)
+    setAnswers([])
+    setView('quiz')
   }
 
-  if (isFinished) {
+  if (view === 'review') {
+    return (
+      <Review
+        questions={questions}
+        answers={answers}
+        subjectName={subjectName}
+        onBack={onBack}
+        onRetry={handleRestart}
+      />
+    )
+  }
+
+  if (view === 'result') {
     return (
       <Result
         score={score}
         total={questions.length}
+        subjectName={subjectName}
         onRestart={handleRestart}
+        onReview={() => setView('review')}
+        onBack={onBack}
       />
     )
   }
 
   return (
     <div className="quiz">
+      <div className="quiz-top">
+        <button type="button" className="btn-back" onClick={onBack}>
+          ← Back
+        </button>
+        <span className="subject-label">{subjectName}</span>
+      </div>
+
       <ProgressBar current={currentIndex + 1} total={questions.length} />
 
       <div className="score-badge">
@@ -74,6 +101,9 @@ function Quiz({ questions }) {
               ? 'Correct! Well done.'
               : 'Incorrect. The right answer is highlighted above.'}
           </p>
+          {currentQuestion.explanation && (
+            <p className="feedback-explanation">{currentQuestion.explanation}</p>
+          )}
           <button type="button" className="btn btn-primary" onClick={handleNext}>
             {isLastQuestion ? 'See Results' : 'Next Question'}
           </button>

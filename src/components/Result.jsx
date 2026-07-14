@@ -1,4 +1,4 @@
-function Result({ score, total, onRestart }) {
+function Result({ score, total, subjectName, onRestart, onReview, onBack }) {
   const percentage = Math.round((score / total) * 100)
 
   const getMessage = () => {
@@ -18,11 +18,15 @@ function Result({ score, total, onRestart }) {
 
   return (
     <div className="result">
+      <p className="result-subject">{subjectName}</p>
+
       <div className={`result-score ${getGradeClass()}`}>
         <span className="score-value">{percentage}%</span>
         <span className="score-fraction">{score} / {total} correct</span>
       </div>
+
       <h2 className="result-message">{getMessage()}</h2>
+
       <div className="result-breakdown">
         <div className="breakdown-item correct-count">
           <span className="breakdown-number">{score}</span>
@@ -33,9 +37,18 @@ function Result({ score, total, onRestart }) {
           <span className="breakdown-label">Incorrect</span>
         </div>
       </div>
-      <button type="button" className="btn btn-primary" onClick={onRestart}>
-        Try Again
-      </button>
+
+      <div className="result-actions">
+        <button type="button" className="btn btn-primary" onClick={onReview}>
+          Review Answers
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={onRestart}>
+          Try Again
+        </button>
+        <button type="button" className="btn btn-ghost" onClick={onBack}>
+          Back to Subjects
+        </button>
+      </div>
     </div>
   )
 }
