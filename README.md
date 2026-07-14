@@ -1,54 +1,94 @@
-# Quiz App
+# 🧠 Quiz App
 
-A React quiz application built with Vite. Test your knowledge with 10 multiple-choice questions on web development.
+A modern and interactive Quiz Application built with **React** and **Vite**. It allows users to answer multiple-choice questions, track their score, and view results instantly.
 
-## Features
+---
 
-- Welcome screen with quiz overview
-- 10 multiple-choice questions
-- Instant feedback on each answer
-- Progress bar and live score tracking
-- Results screen with percentage and breakdown
-- Retry the quiz anytime
+## 🌐 Live Demo
 
-## Getting Started
+👉 https://quiz-app-mocha-five-15.vercel.app/
+
+---
+
+## ✨ Features
+
+- 📚 Multiple-choice quiz
+- ⚡ Fast performance with Vite
+- 📱 Responsive design
+- 🎯 Instant score calculation
+- 🔄 Restart quiz functionality
+
+---
+
+## 🛠️ Tech Stack
+
+- React
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+
+---
+
+## 📂 Project Structure
+
+```
+Quiz-App/
+├── public/
+├── src/
+│   ├── components/
+│   ├── data/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Clone the repository
 
 ```bash
-# Install dependencies
+git clone https://github.com/rangasai018/Quiz-App.git
+```
+
+### Navigate to the project
+
+```bash
+cd Quiz-App
+```
+
+### Install dependencies
+
+```bash
 npm install
+```
 
-# Start development server
+### Start the development server
+
+```bash
 npm run dev
-
-# Build for production
-npm run build
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser after starting the dev server.
-
-## Project Structure
+Visit:
 
 ```
-src/
-├── components/
-│   ├── Welcome.jsx      # Start screen
-│   ├── Quiz.jsx         # Quiz flow manager
-│   ├── Question.jsx     # Question display
-│   ├── ProgressBar.jsx  # Progress indicator
-│   └── Result.jsx       # Results screen
-├── data/
-│   └── questions.js     # Quiz questions data
-├── App.jsx
-├── App.css
-├── index.css
-└── main.jsx
+http://localhost:5173
 ```
 
-## Customizing Questions
+---
 
-Edit `src/data/questions.js` to add, remove, or modify questions. Each question needs:
+## 👨‍💻 Author
 
-- `id` — unique number
-- `question` — the question text
-- `options` — array of 4 answer choices
-- `correctAnswer` — index (0–3) of the correct option
+**Ranga Sai CH**
+
+- GitHub: https://github.com/rangasai018
+- LinkedIn: *(Add your LinkedIn profile here)*
+
+---
+
+⭐ If you found this project useful, please consider giving it a star!
